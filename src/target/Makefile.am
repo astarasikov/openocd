@@ -24,7 +24,8 @@ noinst_LTLIBRARIES += %D%/libtarget.la
 	%D%/dsp563xx.c \
 	%D%/dsp563xx_once.c \
 	%D%/dsp5680xx.c \
-	%D%/hla_target.c
+	%D%/hla_target.c \
+	%D%/msm/msm_nand.c
 
 TARGET_CORE_SRC = \
 	%D%/algorithm.c \

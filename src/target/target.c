@@ -3017,6 +3017,17 @@ COMMAND_HANDLER(handle_md_command)
 	return retval;
 }
 
+COMMAND_HANDLER(handle_msm_nand)
+{
+	struct target *target = get_current_target(CMD_CTX);
+	uint32_t block = 0;
+	if (CMD_ARGC) {
+		COMMAND_PARSE_NUMBER(u32, CMD_ARGV[0], block);
+	}
+	extern int handle_msm_nand_internal(struct target *target, uint32_t block);
+	return handle_msm_nand_internal(target, block);
+}
+
 typedef int (*target_write_fn)(struct target *target,
 		uint32_t address, uint32_t size, uint32_t count, const uint8_t *buffer);
 
@@ -6279,6 +6290,13 @@ static const struct command_registration target_exec_command_handlers[] = {
 		.mode = COMMAND_EXEC,
 		.help = "Test the target's memory access functions",
 		.usage = "size",
+	},
+	{
+		.name = "msm_nand",
+		.handler = handle_msm_nand,
+		.mode = COMMAND_EXEC,
+		.help = "Probe MSM7200A NAND Controller",
+		.usage = " ",
 	},
 
 	COMMAND_REGISTRATION_DONE
